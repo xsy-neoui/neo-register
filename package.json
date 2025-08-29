@@ -1,0 +1,61 @@
+{
+  "name": "neo-widgets",
+  "version": "1.0.2",
+  "description": "neo自定义组件注册器（支持 react 和 vue2.0 技术栈），主要用于注册 neo 渲染器、neo-editor 插件。",
+  "keywords": [
+    "neo自定义组件注册器",
+    "neo自定义组件",
+    "neo-editor自定义插件"
+  ],
+  "author": "wibetter",
+  "license": "MIT",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "scripts": {
+    "linkDebug": "neo linkDebug",
+    "build2lib": "neo build2lib",
+    "build2esm": "neo build2esm",
+    "format": "prettier --write \"src/**/**/*.{js,jsx,ts,tsx,vue,scss,json}\""
+  },
+  "files": [
+    "dist/*"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/**/**/*.{js,jsx,ts,tsx,vue,scss,json}": [
+      "prettier --write"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git@github.com:wibetter/neo-widgets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wibetter/neo-widgets/issues"
+  },
+  "dependencies": {
+    "vue": "^2.6.14"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^9.1.1",
+    "@types/react": "^16.14.66",
+    "@types/react-dom": "^16.9.25",
+    "@types/vue": "^1.0.31",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.9",
+    "neo-widget-cli": "^1.0.15",
+    "prettier": "^2.0.5",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "engines": {
+    "node": ">= 10.13.0",
+    "npm": ">= 6.4.1"
+  }
+}

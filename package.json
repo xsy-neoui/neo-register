@@ -1,6 +1,6 @@
 {
   "name": "neo-widgets",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "neo自定义组件注册器（支持 react 和 vue2.0 技术栈），主要用于注册 neo 渲染器、neo-editor 插件。",
   "keywords": [
     "neo自定义组件注册器",
@@ -49,7 +49,7 @@
     "@types/vue": "^1.0.31",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.9",
-    "neo-widget-cli": "^1.0.15",
+    "neo-widget-cli": "^1.0.22",
     "prettier": "^2.0.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"

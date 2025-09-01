@@ -70,8 +70,9 @@ function getFrameworkByCmp(component) {
     return 'react';
 }
 function isVueComponent(component) {
-    console.log('component:', component, typeof component === 'object' && component.__file && component.__file.endsWith('.vue'));
-    return typeof component === 'object' && component.__file && component.__file.endsWith('.vue');
+    return (typeof component === 'object' && (component._compiled && component.components ||
+        component.__file &&
+            component.__file.endsWith('.vue')));
 }
 var Usage;
 (function (Usage) {
@@ -153,7 +154,7 @@ function isProxy(obj) {
         obj.$mstObservable ||
         obj.$modelType ||
         obj.$modelId);
-    return hasMSTProperties || Object.prototype.toString.call(obj) === '[object Proxy]';
+    return (hasMSTProperties || Object.prototype.toString.call(obj) === '[object Proxy]');
 }
 
 /**
@@ -232,7 +233,7 @@ function createVue2Component(vueObj) {
                 data: () => curVueData,
                 props: extendObject(neoFunc, {
                     ...(rest.props || {}),
-                    ...neoMSTData
+                    ...neoMSTData,
                 }),
             });
             Object.keys(neoFunc).forEach((key) => {

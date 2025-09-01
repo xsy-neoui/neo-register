@@ -51,17 +51,10 @@ export function isReactComponent(component: any): boolean {
   return typeof component === 'function';
 }
 export function isVueComponent(component: any): boolean {
-  console.log(
-    'component:',
-    component,
-    typeof component === 'object' &&
-      component.__file &&
-      component.__file.endsWith('.vue'),
-  );
   return (
     typeof component === 'object' &&
-    component.__file &&
-    component.__file.endsWith('.vue')
+    ((component._compiled && component.components) ||
+      (component.__file && component.__file.endsWith('.vue')))
   );
 }
 

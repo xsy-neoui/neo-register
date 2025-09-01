@@ -1,7 +1,7 @@
 # neo-widgets
-> neo组件注册器（支持 react 和 vue2.0 技术栈）；
+> neo 组件注册器（支持 react 和 vue2.0 技术栈）；
 - 提供注册 neo 自定义组件和 neo-editor 自定义插件的方法；
-- 目前支持的技术栈：vue2、react。
+- 目前支持的技术栈：vue2.0、react。
 
 ### 提供的方法
 - registerRendererByType: 根据type类型注册 neo自定义组件
@@ -49,12 +49,11 @@ class MyReactSelect extends React.PureComponent {
           ))}
         </select>
       </div>
-
     );
   }
 }
 
-// 注册neo自定义组件
+// 注册 neo 自定义组件
 registerRendererByType(MyReactSelect, 'react-select');
 
 export default MyReactSelect;
@@ -65,7 +64,7 @@ export default MyReactSelect;
 import { registerNeoEditorPlugin } from 'neo-widgets';
 
 class ReactSelectPlugin {
-  cmp = 'react-select'; // 对应的neo渲染器
+  cmpType = 'react-select'; // 对应的neo渲染器
   name = 'select 自定义组件';
   description = 'react-select 自定义组件';
   tags = ['自定义组件']; // 自定义组件分类
@@ -128,7 +127,7 @@ class ReactSelectPlugin {
     }
   ];
 }
-// 注册一个neo-editor插件（仅页面设计器需要，会在自定义组件面板中展示）
+// 注册一个 neo-editor 自定义插件（仅页面设计器需要，会在自定义组件面板中展示）
 registerNeoEditorPlugin(ReactSelectPlugin);
 
 export default ReactSelectPlugin;

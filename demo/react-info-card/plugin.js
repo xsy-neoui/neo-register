@@ -3,37 +3,40 @@
  */
 // @ts-ignore
 import { registerNeoEditorPlugin } from '../../dist/index';
-
-// 自定义组件名称，用于标识组件的唯一性
-const WidgetCmpType = 'react-info-card';
 export class InfoCardPlugin {
-  cmpType = WidgetCmpType;
-  name = 'react 信息卡片';
+  // 自定义组件名称，用于标识组件的唯一性
+  cmpType = 'react-info-card';
+
+  // 组件名称，用于设置在编辑器左侧组件面板中展示的名称
+  label = 'react 信息卡片';
+
+  // 组件描述，用于设置在编辑器左侧组件面板中展示的描述
   description = '信息展示卡片';
-  tags = ['自定义'];
-  icon = 'fa fa-file-code-o';
+
+  // 分类标签，用于设置在编辑器左侧组件面板哪个分类中展示（可设置多个分类标签）
+  tags = ['自定义组件'];
   
-  // 初次插入页面的默认数据
-  scaffold = {
-    cmpType: WidgetCmpType,
-    props: {
-      title: '营销服全场景智能CRM，帮助企业搭建数字化客户经营平台，实现业绩高质量增长。',
-      label: '信息卡片',
-      backgroundImage: 'https://neo-widgets.bj.bcebos.com/NeoCRM.jpg',
-      img_count: 3,
-      comment_count: 2021
-    },
+  // 组件图标，用于设置在编辑器左侧组件面板中展示的图标
+  iconSrc = 'https://neo-widgets.bj.bcebos.com/custom-widget.svg';
+  // iconSrc = 'https://neo-widgets.bj.bcebos.com/favicon.png';
+
+  // 初次插入页面的默认属性数据
+  defaultComProps = {
+    title: '营销服全场景智能CRM，帮助企业搭建数字化客户经营平台，实现业绩高质量增长。',
+    label: 'react 信息卡片',
+    backgroundImage: 'https://neo-widgets.bj.bcebos.com/NeoCRM.jpg',
+    img_count: 3,
+    comment_count: 2025,
   };
+
   // 设计器端预览时展示的默认数据
-  previewSchema = {
-    cmpType: WidgetCmpType,
-    props: {
-      label: 'react 信息卡片'
-    }
+  previewComProps = {
+    label: 'react 信息卡片'
   };
 
   panelTitle = '配置';
 
+  // 组件面板配置，用于生成编辑器右侧属性配置面板内容
   panelControls = [
     {
       type: 'textarea',
@@ -43,22 +46,22 @@ export class InfoCardPlugin {
         '营销服全场景智能CRM，帮助企业搭建数字化客户经营平台，实现业绩高质量增长。',
     },
     {
-      type: 'text',
+      type: 'textarea',
       name: 'backgroundImage',
       label: '展示图片',
       value: 'https://neo-widgets.bj.bcebos.com/NeoCRM.jpg',
     },
     {
-      type: 'input-number',
+      type: 'number',
       name: 'img_count',
       label: '图片数量',
       value: 3,
     },
     {
-      type: 'input-number',
+      type: 'number',
       name: 'comment_count',
       label: '评论数',
-      value: 2021,
+      value: 2025,
     },
   ];
 }

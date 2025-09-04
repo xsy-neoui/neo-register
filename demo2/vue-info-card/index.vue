@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="news-info">
-      <div class="left media-mark">NeoCRM · 低代码平台@Vue2.0组件</div>
+      <div class="left media-mark">NeoCRM · 低代码平台@Vue2.0组件@wibetter</div>
       <div v-if="comment_count && comment_count != 0" class="cmt-num right">
         {{ agreeDataFormat(comment_count) }}评
       </div>

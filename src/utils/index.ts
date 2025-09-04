@@ -111,19 +111,23 @@ export function isEditorPlugin(EditorPluginClass: any) {
     console.error(
       `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，cmpType 不能为空。`,
     );
-  } else if (!_editorPluginObj.name) {
+  } else if (!_editorPluginObj.label) {
     console.error(
-      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，名称（name）不能为空。`,
+      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，名称（label）不能为空。`,
     );
-  } else if (!_editorPluginObj.description) {
+  } else if (!_editorPluginObj.tags) {
     console.error(
-      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，描述（description）不能为空。`,
+      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，组件分类（tags）不能为空。`,
+    );
+  } else if (!Array.isArray(_editorPluginObj.tags)) {
+    console.error(
+      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，组件分类（tags）格式异常。`,
     );
   } else {
-    // 1.设置一个默认icon
+    // 1.设置一个默认 icon
     if (!_editorPluginObj.icon) {
       Object.assign(EditorPluginClass.prototype, {
-        icon: 'fa fa-file-code-o',
+        icon: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
       });
     }
     _isEditorPlugin = true;

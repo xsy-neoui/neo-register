@@ -70,9 +70,9 @@ function getFrameworkByCmp(component) {
     return 'react';
 }
 function isVueComponent(component) {
-    return (typeof component === 'object' && (component._compiled && component.components ||
-        component.__file &&
-            component.__file.endsWith('.vue')));
+    return (typeof component === 'object' &&
+        ((component._compiled && component.components) ||
+            (component.__file && component.__file.endsWith('.vue'))));
 }
 var Usage;
 (function (Usage) {
@@ -125,17 +125,20 @@ function isEditorPlugin(EditorPluginClass) {
     if (!_editorPluginObj.cmpType) {
         console.error(`${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，cmpType 不能为空。`);
     }
-    else if (!_editorPluginObj.name) {
-        console.error(`${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，名称（name）不能为空。`);
+    else if (!_editorPluginObj.label) {
+        console.error(`${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，名称（label）不能为空。`);
     }
-    else if (!_editorPluginObj.description) {
-        console.error(`${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，描述（description）不能为空。`);
+    else if (!_editorPluginObj.tags) {
+        console.error(`${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，组件分类（tags）不能为空。`);
+    }
+    else if (!Array.isArray(_editorPluginObj.tags)) {
+        console.error(`${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，组件分类（tags）格式异常。`);
     }
     else {
-        // 1.设置一个默认icon
+        // 1.设置一个默认 icon
         if (!_editorPluginObj.icon) {
             Object.assign(EditorPluginClass.prototype, {
-                icon: 'fa fa-file-code-o',
+                icon: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
             });
         }
         _isEditorPlugin = true;
@@ -162,21 +165,24 @@ function isProxy(obj) {
  */
 function registerNeoEditorPlugin(curEditorPlugin, cmpType) {
     if (curEditorPlugin && isEditorPlugin(curEditorPlugin)) {
-        const curEditorPluginName = cmpType || new curEditorPlugin().cmpType;
+        const curCmpType = cmpType || new curEditorPlugin().cmpType;
+        const curEditorPluginObj = new curEditorPlugin();
         Object.assign(curEditorPlugin.prototype, {
-            isCustomWidget: true,
-            cmpType: curEditorPluginName,
+            custom: true,
+            exposedToDesigner: curEditorPluginObj.exposedToDesigner ?? true,
+            namespace: curEditorPluginObj.namespace ?? 'neo-widget-cli',
+            cmpType: curCmpType
         });
         // registerEditorPlugin(curEditorPlugin); // 不直接注册为 neo-editor 插件
         // 通过 postMessage 告知 neo-editor 注册一个新的插件
         if (window && window.postMessage) {
-            const newComponentType = AddCustomEditorPlugin(curEditorPluginName, curEditorPlugin);
+            const newComponentType = AddCustomEditorPlugin(curCmpType, curEditorPlugin);
             if (newComponentType) {
-                console.info(`${consoleTag}触发注册自定义插件(${curEditorPluginName})事件`);
+                console.info(`${consoleTag}触发注册自定义插件(${curCmpType})事件`);
                 window.postMessage({
                     type: 'neo-plugin-register-event',
                     eventMsg: `${consoleTag}注册一个 neo-editor 自定义插件`,
-                    editorPluginName: curEditorPluginName,
+                    cmpType: curCmpType,
                 }, '*');
             }
         }

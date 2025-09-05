@@ -34,7 +34,17 @@ export class InfoCardPlugin {
     label: 'react 信息卡片'
   };
 
-  panelTitle = '配置';
+  /**
+   * 是否可用，组件池中也会有禁用的状态
+   */
+  disabled = false;
+
+  /**
+   * 是否可删除
+   * - 当此值为false时，所有实例不可删除
+   * - 当此值为true时，各实例是否可删除，还需结合实例本身的定义
+   */
+  deletable = true;
 
   // 组件面板配置，用于生成编辑器右侧属性配置面板内容
   panelControls = [

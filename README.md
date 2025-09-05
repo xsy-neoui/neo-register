@@ -64,14 +64,12 @@ export default MyReactSelect;
 import { registerNeoEditorPlugin } from 'neo-widgets';
 
 class ReactSelectPlugin {
-  cmpType = 'react-select'; // 对应的neo渲染器
-  name = 'select 自定义组件';
-  description = 'react-select 自定义组件';
+  cmpType = 'react-select'; // 自定义组件名称，用于标识组件的唯一性
+  label = 'select 自定义组件'; // 组件名称，用于设置在编辑器左侧组件面板中展示的名称
+  description = 'react-select 自定义组件'; // 组件描述，用于设置在编辑器左侧组件面板中展示的描述
   tags = ['自定义组件']; // 自定义组件分类
-  icon = 'fa fa-file-code-o';
-  order = 100; // 组件面板中的展示优先级，越小越靠前展示
-  scaffold = { // 插入到页面时需要
-    type: 'react-select',
+  iconSrc = 'https://neo-widgets.bj.bcebos.com/custom-widget.svg'; // 组件图标，用于设置在编辑器左侧组件面板中展示的图标
+  defaultComProps = { // 初次插入页面的默认属性数据
     label: 'select 自定义组件',
     name: 'customSelect',
     options: [
@@ -89,8 +87,7 @@ class ReactSelectPlugin {
       }
     ]
   };
-  previewSchema = { // 组件面板预览时需要
-    type: 'react-select',
+  previewComProps = { // 设计器端预览时展示的默认数据
     label: 'select 自定义组件',
     options: [
       {
@@ -107,10 +104,9 @@ class ReactSelectPlugin {
       }
     ]
   };
-  panelTitle = '下拉框'; // 右侧属性面板Title
-  panelBody = [ // 右侧属性面板配置项
+  panelControls = [ // 组件面板配置，用于生成编辑器右侧属性配置面板内容
     {
-      type: 'input-text',
+      type: 'text',
       name: 'label',
       label: 'label',
       value: 'react-select'
@@ -120,10 +116,6 @@ class ReactSelectPlugin {
       name: 'title',
       label: 'hover title',
       value: '点击下拉选择数值'
-    },
-    {
-      type: 'tpl',
-      tpl: '备注：可根据变量 \\${neoUser} 获取用户数据。'
     }
   ];
 }
@@ -132,3 +124,6 @@ registerNeoEditorPlugin(ReactSelectPlugin);
 
 export default ReactSelectPlugin;
 ```
+
+## 自定义组件配置项设置说明
+- panelControls 中可用的配置项类型 请见 [当前可用表单项](./docs/FormItemType.md)。

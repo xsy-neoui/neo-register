@@ -35,18 +35,8 @@ export class InfoCardPlugin {
   };
 
   /**
-   * 是否可用，组件池中也会有禁用的状态
+   * 组件面板配置，用于生成编辑器右侧属性配置面板内容
    */
-  disabled = false;
-
-  /**
-   * 是否可删除
-   * - 当此值为false时，所有实例不可删除
-   * - 当此值为true时，各实例是否可删除，还需结合实例本身的定义
-   */
-  deletable = true;
-
-  // 组件面板配置，用于生成编辑器右侧属性配置面板内容
   panelControls = [
     {
       type: 'textarea',
@@ -56,7 +46,7 @@ export class InfoCardPlugin {
         '营销服全场景智能CRM，帮助企业搭建数字化客户经营平台，实现业绩高质量增长。',
     },
     {
-      type: 'textarea',
+      type: 'text',
       name: 'backgroundImage',
       label: '展示图片',
       value: 'https://neo-widgets.bj.bcebos.com/NeoCRM.jpg',
@@ -74,6 +64,13 @@ export class InfoCardPlugin {
       value: 2025,
     },
   ];
+
+  // 支持 函数式写法：panelControlsCreator，com 为页面设计器中的组件实例。优先级比 panelControls 高
+  /*
+  panelControlsCreator = (com: any) => {
+    return [];
+  };
+  */
 }
 
 registerNeoEditorPlugin(InfoCardPlugin);

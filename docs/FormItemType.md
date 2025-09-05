@@ -156,4 +156,4 @@
 ## 使用说明
 
 - 以上表单项为 amis 表单项（基于amis 1.1.5私有化版本）
-- 相关表单项使用说明请见 [amis 使用文档](https://baidu.github.io/amis/zh-CN/components/form/index)
+- 相关表单项使用说明请见 [amis 使用文档](https://aisuda.bce.baidu.com/amis/zh-CN/components/form/index)

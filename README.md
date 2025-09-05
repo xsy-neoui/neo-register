@@ -119,7 +119,7 @@ class ReactSelectPlugin {
     }
   ];
 }
-// 注册一个 neo-editor 自定义插件（仅页面设计器需要，会在自定义组件面板中展示）
+// 注册一个 neo-editor 自定义插件（仅页面设计器需要，会在组件面板中展示）
 registerNeoEditorPlugin(ReactSelectPlugin);
 
 export default ReactSelectPlugin;

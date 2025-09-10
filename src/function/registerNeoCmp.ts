@@ -11,7 +11,7 @@ import {
 } from '../utils';
 
 /**
- * neo-editor 自定义插件配置项
+ * neo-editor 自定义组件模型配置项
  */
 export interface NeoRendererOption {
   /**
@@ -42,11 +42,11 @@ export interface NeoRendererOption {
 
 declare const window: Window & {
   postMessage: any;
-  NeoCustomRenderers: any;
+  NeoCustomCmps: any;
 };
 
 /**
- * registerRendererByType: 根据type类型注册 neo 自定义组件
+ * registerNeoCmp: 根据type类型注册 neo 自定义组件
  *【方法参数说明】
  * newRenderer: 自定义组件,
  * rendererOption: {
@@ -57,7 +57,7 @@ declare const window: Window & {
  * }
  * 备注：暂不支持 vue3.0 技术栈
  */
-export function registerRendererByType(
+export function registerNeoCmp(
   newRenderer: any,
   rendererOption: string | NeoRendererOption,
 ) {
@@ -83,7 +83,7 @@ export function registerRendererByType(
 
   if (curRendererOption && !curRendererOption.cmpType) {
     console.error(
-      `${consoleTag} / registerRendererByType: 自定义组件注册失败，cmpType 不能为空。`,
+      `${consoleTag} / registerNeoCmp: 自定义组件注册失败，cmpType 不能为空。`,
     );
   } else {
     // 根据组件结构自动识别组件技术栈
@@ -110,29 +110,26 @@ export function registerRendererByType(
     // 注册neo渲染器
     if (!registerMap[curRendererOption.usage]) {
       console.error(
-        `${consoleTag} / registerRendererByType: 自定义组件注册失败，暂不支持 ${curRendererOption.usage} 组件类型。`,
+        `${consoleTag} / registerNeoCmp: 自定义组件注册失败，暂不支持 ${curRendererOption.usage} 组件类型。`,
       );
     } else {
       // 通过 postMessage 告知 neo 注册一个新的渲染器
       if (window && window.postMessage) {
-        const newComponentType = AddNeoCustomRenderer(
-          curRendererOption.cmpType,
-          {
-            cmpType: curRendererOption.cmpType,
-            weight: curRendererOption.weight,
-            usage: curRendererOption.usage,
-            framework: curRendererOption.framework,
-            component: curRendererComponent,
-            config: curRendererOption,
-          },
-        );
+        const newComponentType = AddNeoCustomModel(curRendererOption.cmpType, {
+          cmpType: curRendererOption.cmpType,
+          weight: curRendererOption.weight,
+          usage: curRendererOption.usage,
+          framework: curRendererOption.framework,
+          component: curRendererComponent,
+          config: curRendererOption,
+        });
         if (newComponentType) {
           console.info(
             `${consoleTag}触发注册自定义组件(${newComponentType})事件`,
           );
           window.postMessage(
             {
-              type: 'neo-renderer-register-event',
+              type: 'neo-cmp-register-event',
               eventMsg: `${consoleTag}注册一个自定义组件`,
               neoRenderer: {
                 cmpType: newComponentType,
@@ -149,16 +146,16 @@ export function registerRendererByType(
   }
 }
 
-function AddNeoCustomRenderer(componentType: string, rendererData: any) {
-  if (window && !window.NeoCustomRenderers) {
-    window.NeoCustomRenderers = {};
+function AddNeoCustomModel(componentType: string, rendererData: any) {
+  if (window && !window.NeoCustomCmps) {
+    window.NeoCustomCmps = {};
   }
-  if (!window.NeoCustomRenderers[componentType]) {
-    window.NeoCustomRenderers[componentType] = rendererData;
+  if (!window.NeoCustomCmps[componentType]) {
+    window.NeoCustomCmps[componentType] = rendererData;
     return componentType;
   } else {
     console.error(
-      `${consoleTag} / registerRendererByType: 自定义组件注册失败，已存在重名渲染器(${componentType})。`,
+      `${consoleTag} / registerNeoCmp: 自定义组件注册失败，已存在重名渲染器(${componentType})。`,
     );
   }
   return null;

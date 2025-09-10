@@ -1,5 +1,5 @@
 <template>
-  <div class="news-card" :key="uuid">
+  <div class="info-card-container" :key="uuid">
     <div class="news-title">{{ title }}</div>
     <div class="item-imgbox">
       <div
@@ -52,19 +52,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.left {
-  float: left;
-}
-.right {
-  float: right;
-}
-.news-card {
+.info-card-container {
   position: relative;
   box-sizing: border-box;
   // border-bottom: 1px solid #ececec;
   margin: 6px 12px;
   padding: 6px 12px;
   background-color: #fff;
+
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
 
   .news-title {
     padding: 6px 0;

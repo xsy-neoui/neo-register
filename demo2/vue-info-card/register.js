@@ -1,4 +1,4 @@
-import { registerRendererByType } from '../../src/main';
+import { registerNeoCmp } from '../../src/main';
 import InfoCard from './index';
 
-registerRendererByType(InfoCard, 'vue-info-card');
+registerNeoCmp(InfoCard, 'vue-info-card');

@@ -1,4 +1,4 @@
-export declare const consoleTag = "[neo-widget]";
+export declare const consoleTag = "[neo-register]";
 export * from './object';
 /**
  * 获取技术栈标识
@@ -23,8 +23,8 @@ export declare enum Usage {
  */
 export declare function getUsage(_usage?: string): string;
 /**
- * 当前 neo-widget 支持的技术栈
- * 备注：vue2和vue3不能同时存在
+ * 当前 neo-register 支持的技术栈
+ * 备注：vue2 和 vue3 不能同时存在
  */
 export declare enum Framework {
     react = "react",
@@ -32,7 +32,7 @@ export declare enum Framework {
     vue3 = "vue3",
     jquery = "jquery"
 }
-export declare function isEditorPlugin(EditorPluginClass: any): boolean;
+export declare function isEditorModel(EditorModelClass: any): boolean;
 export declare function isString(str: any): boolean;
 export declare function isObject(obj: any): boolean;
 export declare function isProxy(obj: any): boolean;

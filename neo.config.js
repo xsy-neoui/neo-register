@@ -33,13 +33,13 @@ module.exports = {
     moduleRules: [], // 用于配置自定义loaders
     plugins: [], // 用于配置自定义plugins
   },
-  linkDebug1: {
+  linkDebug: {
     entry: { // 外链调试（在线上页面设计器端预览自定义组件）
       index: [
         './demo/react-info-card/register.js',
-        './demo/react-info-card/plugin.js',
+        './demo/react-info-card/model.js',
         './demo/vue-info-card/register.js',
-        './demo/vue-info-card/plugin.js'
+        './demo/vue-info-card/model.js'
       ],
     },
     NODE_ENV: 'development',
@@ -52,13 +52,13 @@ module.exports = {
     cssSourceMap: true,
     closeHotReload: false, // 是否关闭热更新
   },
-  linkDebug: {
+  linkDebug2: {
     entry: { // 外链调试（在线上页面设计器端预览自定义组件）
       index: [
         './demo2/react-info-card/register.js',
-        './demo2/react-info-card/plugin.js',
+        './demo2/react-info-card/model.js',
         './demo2/vue-info-card/register.js',
-        './demo2/vue-info-card/plugin.js'
+        './demo2/vue-info-card/model.js'
       ],
     },
     NODE_ENV: 'development',
@@ -77,7 +77,7 @@ module.exports = {
     },
     // 用于构建生产环境代码的相关配置信息
     NODE_ENV: 'production', // development / production
-    libraryName: 'neoWidget', // 构建第三方功能包时最后导出的引用变量名
+    libraryName: 'neoRegister', // 构建第三方功能包时最后导出的引用变量名
     assetsRoot: resolve('./dist'), // 打包后的文件绝对路径（物理路径）
     assetsPublicPath: '/', // 设置静态资源的引用路径（根域名+路径）
     assetsSubDirectory: '', // 资源引用二级路径

@@ -1,4 +1,4 @@
 import InfoCard from './index';
-import { registerRendererByType } from '../../src/main';
+import { registerNeoCmp } from '../../src/main';
 
-registerRendererByType(InfoCard, 'react-info-card');
+registerNeoCmp(InfoCard, 'react-info-card');

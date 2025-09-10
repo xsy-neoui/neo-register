@@ -26,7 +26,7 @@ export default class InfoCard extends React.PureComponent {
       backgroundImage ||
       'https://neo-widgets.bj.bcebos.com/NeoCRM.jpg';
     return (
-      <div className="news-card">
+      <div className="info-card-container">
         <div className="news-title">
           {title ||
             '营销服全场景智能CRM，帮助企业搭建数字化客户经营平台，实现业绩高质量增长。'}

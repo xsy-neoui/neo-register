@@ -1,5 +1,5 @@
 /**
- * neo-editor 自定义插件配置项
+ * neo-editor 自定义组件模型配置项
  */
 export interface NeoRendererOption {
     /**
@@ -25,7 +25,7 @@ export interface NeoRendererOption {
     framework?: string;
 }
 /**
- * registerRendererByType: 根据type类型注册 neo 自定义组件
+ * registerNeoCmp: 根据type类型注册 neo 自定义组件
  *【方法参数说明】
  * newRenderer: 自定义组件,
  * rendererOption: {
@@ -36,4 +36,4 @@ export interface NeoRendererOption {
  * }
  * 备注：暂不支持 vue3.0 技术栈
  */
-export declare function registerRendererByType(newRenderer: any, rendererOption: string | NeoRendererOption): void;
+export declare function registerNeoCmp(newRenderer: any, rendererOption: string | NeoRendererOption): void;

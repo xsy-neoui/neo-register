@@ -1,11 +1,11 @@
 {
-  "name": "neo-widgets",
-  "version": "1.0.7",
-  "description": "neo自定义组件注册器（支持 react 和 vue2.0 技术栈），主要用于注册 neo 渲染器、neo-editor 插件。",
+  "name": "neo-register",
+  "version": "1.0.0",
+  "description": "neo自定义组件注册器（支持 react 和 vue2.0 技术栈），主要用于注册 neo 自定义组件、neo-editor 自定义组件模型。",
   "keywords": [
     "neo自定义组件注册器",
     "neo自定义组件",
-    "neo-editor自定义插件"
+    "neo-editor自定义组件模型"
   ],
   "author": "wibetter",
   "license": "MIT",
@@ -34,10 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git@github.com:wibetter/neo-widgets.git"
+    "url": "https://git@github.com:wibetter/neo-register.git"
   },
   "bugs": {
-    "url": "https://github.com/wibetter/neo-widgets/issues"
+    "url": "https://github.com/wibetter/neo-register/issues"
   },
   "dependencies": {
     "vue": "^2.6.14"
@@ -50,7 +50,7 @@
     "@types/vue": "^1.0.31",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.9",
-    "neo-widget-cli": "^1.0.22",
+    "neo-cmp-cli": "^1.0.0",
     "prettier": "^2.0.5",
     "react": "^16.9.0",
     "react-dom": "^16.9.0"

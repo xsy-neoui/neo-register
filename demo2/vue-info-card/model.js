@@ -1,9 +1,9 @@
 /**
  * @file 自定义组件对接编辑器的描述文件
  */
-// @ts-ignore
-import { registerNeoEditorPlugin } from '../../dist/index';
-export class InfoCardPlugin {
+import { registerNeoEditorModel } from '../../src/main';
+
+export class InfoCardModel {
   // 自定义组件名称，用于标识组件的唯一性
   cmpType = 'vue-info-card';
 
@@ -37,7 +37,7 @@ export class InfoCardPlugin {
   /**
    * 组件面板配置，用于生成编辑器右侧属性配置面板内容
    */
-  panelControls = [
+  propsSchema = [
     {
       type: 'textarea',
       name: 'title',
@@ -65,15 +65,14 @@ export class InfoCardPlugin {
     },
   ];
 
-  // 支持 函数式写法：panelControlsCreator，com 为页面设计器中的组件实例。优先级比 panelControls 高
+  // 支持 函数式写法：propsSchemaCreator，com 为页面设计器中的组件实例。优先级比 propsSchema 高
   /*
-  panelControlsCreator = (com: any) => {
+  propsSchemaCreator = (com: any) => {
     return [];
   };
   */
 }
 
-registerNeoEditorPlugin(InfoCardPlugin);
+registerNeoEditorModel(InfoCardModel);
 
-export default InfoCardPlugin;
-
+export default InfoCardModel;

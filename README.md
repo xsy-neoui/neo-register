@@ -1,21 +1,21 @@
-# neo-widgets
+# neo-register
 > neo 组件注册器（支持 react 和 vue2.0 技术栈）；
-- 提供注册 neo 自定义组件和 neo-editor 自定义插件的方法；
+- 提供注册 neo自定义组件 和 neo-editor自定义组件模型 的方法；
 - 目前支持的技术栈：vue2.0、react。
 
 ### 提供的方法
-- registerRendererByType: 根据type类型注册 neo自定义组件
-- registerNeoEditorPlugin: 注册 neo-editor 插件
+- registerNeoCmp: 根据 cmpType 注册 neo自定义组件
+- registerNeoEditorModel: 注册 neo-editor 自定义组件模型
 
 ## 快速使用
 
 ```
-npm install --save neo-widgets
+npm install --save neo-register
 ```
 
 ## 注册 neo 自定义组件
 ```tsx
-import { registerRendererByType } from 'neo-widgets';
+import { registerNeoCmp } from 'neo-register';
 
 class MyReactSelect extends React.PureComponent {
   constructor() {
@@ -54,14 +54,14 @@ class MyReactSelect extends React.PureComponent {
 }
 
 // 注册 neo 自定义组件
-registerRendererByType(MyReactSelect, 'react-select');
+registerNeoCmp(MyReactSelect, 'react-select');
 
 export default MyReactSelect;
 ```
 
-## 注册 neo-editor 自定义插件
+## 注册 neo-editor 自定义组件模型
 ```tsx
-import { registerNeoEditorPlugin } from 'neo-widgets';
+import { registerNeoEditorModel } from 'neo-register';
 
 class ReactSelectPlugin {
   cmpType = 'react-select'; // 自定义组件名称，用于标识组件的唯一性
@@ -104,7 +104,7 @@ class ReactSelectPlugin {
       }
     ]
   };
-  panelControls = [ // 组件面板配置，用于生成编辑器右侧属性配置面板内容
+  propsSchema = [ // 组件面板配置，用于生成编辑器右侧属性配置面板内容
     {
       type: 'text',
       name: 'label',
@@ -119,11 +119,11 @@ class ReactSelectPlugin {
     }
   ];
 }
-// 注册一个 neo-editor 自定义插件（仅页面设计器需要，会在组件面板中展示）
-registerNeoEditorPlugin(ReactSelectPlugin);
+// 注册一个 neo-editor 自定义组件模型（仅页面设计器需要，会在组件面板中展示）
+registerNeoEditorModel(ReactSelectPlugin);
 
 export default ReactSelectPlugin;
 ```
 
 ## 自定义组件配置项设置说明
-- panelControls 中可用的配置项类型 请见 [当前可用表单项](./docs/FormItemType.md)。
+- propsSchema 中可用的配置项类型 请见 [当前可用表单项](./docs/FormItemType.md)。

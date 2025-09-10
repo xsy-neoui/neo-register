@@ -1,4 +1,4 @@
-export const consoleTag = '[neo-widget]'; // 输出标记
+export const consoleTag = '[neo-register]'; // 输出标记
 export * from './object';
 
 /**
@@ -28,7 +28,7 @@ export function getFramework(_framework?: string): string {
     case 'vue3.0':
     case 'vue 3.0':
       curFramework = Framework.vue3;
-      console.error('neo-widget 暂不支持 vue3.0 技术栈。');
+      console.error(`${consoleTag} 暂不支持 vue3.0 技术栈。`);
       break;
     default:
       curFramework = Framework.react;
@@ -89,8 +89,8 @@ export function getUsage(_usage?: string): string {
 }
 
 /**
- * 当前 neo-widget 支持的技术栈
- * 备注：vue2和vue3不能同时存在
+ * 当前 neo-register 支持的技术栈
+ * 备注：vue2 和 vue3 不能同时存在
  */
 export enum Framework {
   react = 'react',
@@ -99,40 +99,40 @@ export enum Framework {
   jquery = 'jquery',
 }
 
-// 判断是否缺失editor插件关键字段
-export function isEditorPlugin(EditorPluginClass: any) {
-  let _isEditorPlugin = false;
-  if (!EditorPluginClass) {
+// 判断是否缺失 editor 自定义组件模型关键字段
+export function isEditorModel(EditorModelClass: any) {
+  let _isEditorModel = false;
+  if (!EditorModelClass) {
     return false;
   }
-  const _editorPluginObj = new EditorPluginClass();
+  const _editorPluginObj = new EditorModelClass();
 
   if (!_editorPluginObj.cmpType) {
     console.error(
-      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，cmpType 不能为空。`,
+      `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，cmpType 不能为空。`,
     );
   } else if (!_editorPluginObj.label) {
     console.error(
-      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，名称（label）不能为空。`,
+      `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，名称（label）不能为空。`,
     );
   } else if (!_editorPluginObj.tags) {
     console.error(
-      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，组件分类（tags）不能为空。`,
+      `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，组件分类（tags）不能为空。`,
     );
   } else if (!Array.isArray(_editorPluginObj.tags)) {
     console.error(
-      `${consoleTag} / registerNeoEditorPlugin: 自定义组件注册失败，组件分类（tags）格式异常。`,
+      `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，组件分类（tags）格式异常。`,
     );
   } else {
     // 1.设置一个默认 icon
     if (!_editorPluginObj.icon) {
-      Object.assign(EditorPluginClass.prototype, {
+      Object.assign(EditorModelClass.prototype, {
         icon: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
       });
     }
-    _isEditorPlugin = true;
+    _isEditorModel = true;
   }
-  return _isEditorPlugin;
+  return _isEditorModel;
 }
 
 // 判断是否是字符串类型

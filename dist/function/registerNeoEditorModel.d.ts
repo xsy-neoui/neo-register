@@ -1,5 +1,5 @@
 /**
- * 自定义editor插件配置项
+ * 自定义组件模型 配置项
  */
 export interface PluginOption {
     /**
@@ -19,29 +19,33 @@ export interface PluginOption {
     description?: string;
     /**
      * 自定义组件分类
-     * 指定当前自定义插件在「页面设计器」自定义组件面板中哪个分类下展示
+     * 指定当前自定义组件模型在「页面设计器」自定义组件面板中哪个分类下展示
      */
     tags: string | Array<string>;
     /**
      * 自定义组件icon
      */
-    icon?: string;
+    iconSrc?: string;
     /**
      * 自定义组件排序
-     * 指定当前自定义插件在「页面设计器」自定义组件面板中的展示次序
+     * 指定当前自定义组件模型在「页面设计器」自定义组件面板中的展示次序
      */
     order?: number;
-    /**
-     * 属性配置面板Title
-     */
-    panelTitle?: string;
     /**
      * 自定义组件显隐
      * 备注：设置为false时则不展示
      */
     exposedToDesigner?: boolean;
+    /**
+     * 初次插入页面的默认属性数据
+     */
+    defaultComProps?: boolean;
+    /**
+     * 组件面板配置，用于生成编辑器右侧属性配置面板内容
+     */
+    propsSchema?: boolean;
 }
 /**
- * registerNeoEditorPlugin: 注册 neo-editor 自定义插件
+ * registerNeoEditorModel: 注册 neo-editor 自定义组件模型
  */
-export declare function registerNeoEditorPlugin(curEditorPlugin: any, cmpType?: string): void;
+export declare function registerNeoEditorModel(curEditorModel: any, cmpType?: string): void;

@@ -66,6 +66,13 @@ declare const window: Window & {
 export function registerNeoEditorModel(curEditorModel: any, cmpType?: string) {
   if (curEditorModel && isEditorModel(curEditorModel)) {
     const curCmpType: any = cmpType || new curEditorModel().cmpType;
+
+    if (!curCmpType) {
+      console.error(
+        `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，cmpType 不能为空。`,
+      );
+    }
+
     const curEditorModelObj = new curEditorModel();
     Object.assign(curEditorModel.prototype, {
       custom: true, // 自定义组件标识
@@ -73,7 +80,9 @@ export function registerNeoEditorModel(curEditorModel: any, cmpType?: string) {
       namespace: curEditorModelObj.namespace ?? 'neo-cmp-cli',
       cmpType: curCmpType,
     });
+
     // registerEditorModel(curEditorModel); // 不直接注册为 neo-editor 插件
+
     // 通过 postMessage 告知 neo-editor 注册一个新的插件
     if (window && window.postMessage) {
       const newComponentType = AddCustomEditorModel(curCmpType, curEditorModel);

@@ -107,11 +107,7 @@ export function isEditorModel(EditorModelClass: any) {
   }
   const _editorPluginObj = new EditorModelClass();
 
-  if (!_editorPluginObj.cmpType) {
-    console.error(
-      `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，cmpType 不能为空。`,
-    );
-  } else if (!_editorPluginObj.label) {
+  if (!_editorPluginObj.label) {
     console.error(
       `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，名称（label）不能为空。`,
     );

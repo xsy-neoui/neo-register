@@ -171,6 +171,7 @@ function registerNeoEditorModel(curEditorModel, cmpType) {
             custom: true,
             exposedToDesigner: curEditorModelObj.exposedToDesigner ?? true,
             namespace: curEditorModelObj.namespace ?? 'neo-cmp-cli',
+            enableDuplicate: curEditorModelObj.enableDuplicate ?? true,
             cmpType: curCmpType,
         });
         // registerEditorModel(curEditorModel); // 不直接注册为 neo-editor 插件

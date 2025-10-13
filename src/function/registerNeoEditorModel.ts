@@ -78,6 +78,7 @@ export function registerNeoEditorModel(curEditorModel: any, cmpType?: string) {
       custom: true, // 自定义组件标识
       exposedToDesigner: curEditorModelObj.exposedToDesigner ?? true, // 默认在设计器中显示
       namespace: curEditorModelObj.namespace ?? 'neo-cmp-cli',
+      enableDuplicate: curEditorModelObj.enableDuplicate ?? true, // 默认在设计器中允许重复插入
       cmpType: curCmpType,
     });
 

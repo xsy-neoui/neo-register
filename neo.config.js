@@ -14,6 +14,7 @@ module.exports = {
     enableStyleLintFix: false // 是否需要StyleLint自动修正代码格式
   },
   webpack: {
+    // target: ['web', 'es5'], // 指定目标环境为 web 和 es5，确保兼容性
     resolve: {
       // webpack的resolve配置
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue', '.esm.js', '.umd.js', '.min.js', '.json'], // 用于配置webpack在尝试过程中用到的后缀列表
@@ -32,6 +33,7 @@ module.exports = {
     // cssLoaderUrl: true,
     moduleRules: [], // 用于配置自定义loaders
     plugins: [], // 用于配置自定义plugins
+    babelPlugins: [],
   },
   linkDebug: {
     entry: { // 外链调试（在线上页面设计器端预览自定义组件）
@@ -39,7 +41,9 @@ module.exports = {
         './demo/react-info-card/register.js',
         './demo/react-info-card/model.js',
         './demo/vue-info-card/register.js',
-        './demo/vue-info-card/model.js'
+        './demo/vue-info-card/model.js',
+        './demo2/entity-detail/register.ts',
+        './demo2/entity-detail/model.ts',
       ],
     },
     NODE_ENV: 'development',
@@ -58,7 +62,9 @@ module.exports = {
         './demo2/react-info-card/register.js',
         './demo2/react-info-card/model.js',
         './demo2/vue-info-card/register.js',
-        './demo2/vue-info-card/model.js'
+        './demo2/vue-info-card/model.js',
+        './demo2/entity-detail/register.ts',
+        './demo2/entity-detail/model.ts',
       ],
     },
     NODE_ENV: 'development',

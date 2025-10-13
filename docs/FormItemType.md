@@ -1,6 +1,6 @@
 ## 可作为自定义配置项的表单项组件
 
-### 1. 基础输入类
+### 1. 基础输入类 / 配置项
 
 #### 文本输入
 - **text** - 文本输入框
@@ -27,7 +27,7 @@
 - **date-range** - 日期范围选择器
 - **datetime-range** - 日期时间范围选择器
 
-### 2. 选择类
+### 2. 选择类 / 配置项
 
 #### 单选/多选
 - **select** - 下拉选择框
@@ -50,7 +50,7 @@
 - **picker** - 选择器
 - **tabs-transfer** - 标签页穿梭框
 
-### 3. 特殊输入类
+### 3. 特殊输入类 / 配置项
 
 #### 开关
 - **switch** - 开关组件
@@ -73,7 +73,7 @@
 #### 位置
 - **location** - 位置选择器 
 
-### 4. 文件上传类
+### 4. 文件上传类 / 配置项 （暂不可用）
 
 #### 文件上传
 - **file** - 文件上传组件 
@@ -81,7 +81,7 @@
 #### 图片上传
 - **image** - 图片上传组件
 
-### 5. 富文本编辑类
+### 5. 富文本编辑类 / 配置项
 
 #### 编辑器
 - **js-editor** - JavaScript 编辑器
@@ -104,7 +104,7 @@
 #### 标签页
 - **tabs** - 标签页组件
 
-### 7. 复合组件类
+### 7. 复合组件类 / 配置项
 
 #### 组合
 - **combo** - 组合组件
@@ -144,14 +144,20 @@
 - **condition-builder** - 条件构建器 
 
 #### 矩阵
-- **matrix** - 矩阵组件 
+- **matrix** - 矩阵组件
 
 #### UUID
-- **uuid** - UUID 生成器 
+- **uuid** - UUID 生成器
 
 #### 月份范围
 - **month-range** - 月份范围选择器 
 
+### 9. NeoCRM 平台数据源相关属性配置
+
+#### 实体相关数据源
+- **xObjectEntityList** - 实体列表数据源 [使用文档](./docs/NeoEntityApiType/xObjectEntityList.md)
+- **xObjectDataApi** - 实体业务数据列表数据源 [使用文档](./docs/NeoEntityApiType/xObjectDataApi.md)
+- **xObjectDetailApi** - 实体详情数据源 [使用文档](./docs/NeoEntityApiType/xObjectDetailApi.md)
 
 ## 使用说明
 

@@ -155,9 +155,9 @@
 ### 9. NeoCRM 平台数据源相关属性配置
 
 #### 实体相关数据源
-- **xObjectEntityList** - 实体列表数据源 [使用文档](./docs/NeoEntityApiType/xObjectEntityList.md)
-- **xObjectDataApi** - 实体业务数据列表数据源 [使用文档](./docs/NeoEntityApiType/xObjectDataApi.md)
-- **xObjectDetailApi** - 实体详情数据源 [使用文档](./docs/NeoEntityApiType/xObjectDetailApi.md)
+- **xObjectEntityList** - 实体列表数据源 [使用文档](./NeoEntityApiType/xObjectEntityList.md)
+- **xObjectDataApi** - 实体业务数据列表数据源 [使用文档](./NeoEntityApiType/xObjectDataApi.md)
+- **xObjectDetailApi** - 实体详情数据源 [使用文档](./NeoEntityApiType/xObjectDetailApi.md)
 
 ## 使用说明
 

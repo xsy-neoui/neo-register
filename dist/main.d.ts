@@ -8,3 +8,4 @@
 export { registerNeoEditorModel } from './function/registerNeoEditorModel';
 export { registerNeoCmp } from './function/registerNeoCmp';
 export { createVue2Component } from './frameworkFactory/vueFactory';
+export { autoConvertVueComponent } from './utils';

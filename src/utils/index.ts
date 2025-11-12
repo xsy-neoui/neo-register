@@ -1,3 +1,4 @@
+import { createVue2Component } from '../frameworkFactory/vueFactory';
 export const consoleTag = '[neo-register]'; // 输出标记
 export * from './object';
 
@@ -153,4 +154,12 @@ export function isProxy(obj: any): boolean {
   return (
     hasMSTProperties || Object.prototype.toString.call(obj) === '[object Proxy]'
   );
+}
+
+// 自动识别并转换 vue 组件
+export function autoConvertVueComponent(component: any) {
+  if (isVueComponent(component)) {
+    return createVue2Component(component);
+  }
+  return component;
 }

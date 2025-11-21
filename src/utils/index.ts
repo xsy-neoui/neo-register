@@ -112,19 +112,15 @@ export function isEditorModel(EditorModelClass: any) {
     console.error(
       `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，名称（label）不能为空。`,
     );
-  } else if (!_editorPluginObj.tags) {
-    console.error(
-      `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，组件分类（tags）不能为空。`,
-    );
-  } else if (!Array.isArray(_editorPluginObj.tags)) {
+  } else if (_editorPluginObj.tags && !Array.isArray(_editorPluginObj.tags)) {
     console.error(
       `${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，组件分类（tags）格式异常。`,
     );
   } else {
     // 1.设置一个默认 icon
-    if (!_editorPluginObj.icon) {
+    if (!_editorPluginObj.iconSrc) {
       Object.assign(EditorModelClass.prototype, {
-        icon: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
+        iconSrc: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
       });
     }
     _isEditorModel = true;
@@ -135,10 +131,6 @@ export function isEditorModel(EditorModelClass: any) {
 // 判断是否是字符串类型
 export function isString(str: any): boolean {
   return Object.prototype.toString.call(str).slice(8, -1) === 'String';
-}
-
-export function isObject(obj: any): boolean {
-  return Object.prototype.toString.call(obj).slice(8, -1) === 'Object';
 }
 
 export function isProxy(obj: any): boolean {
@@ -154,12 +146,4 @@ export function isProxy(obj: any): boolean {
   return (
     hasMSTProperties || Object.prototype.toString.call(obj) === '[object Proxy]'
   );
-}
-
-// 自动识别并转换 vue 组件
-export function autoConvertVueComponent(component: any) {
-  if (isVueComponent(component)) {
-    return createVue2Component(component);
-  }
-  return component;
 }

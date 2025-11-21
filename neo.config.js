@@ -25,7 +25,7 @@ module.exports = {
       },
       // conditionNames: ['require']
     },
-    createDeclaration: true, // 打包时是否创建ts声明文件
+    // createDeclaration: false, // 打包时是否创建ts声明文件
     ignoreNodeModules: false, // 打包时是否忽略 node_modules
     allowList: [], // ignoreNodeModules为true时生效
     externals: [],
@@ -95,9 +95,11 @@ module.exports = {
     // bundleAnalyzerReport: false,
   },
   build2esm: {
+    type: 'ts', // js、ts，当设置 ts 时会启动 @rollup/plugin-typescript
     input: resolve('src/main.ts'),
     fileName: 'index',
     // 不将以下依赖打包到输出文件中
     excludeList: [],
+    declaration: true, // 构建时是否创建声明文件
   }
 };

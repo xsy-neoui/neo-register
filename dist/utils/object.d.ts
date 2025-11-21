@@ -5,4 +5,4 @@ export declare function createObject(superProps?: {
 }, properties?: any): object;
 export declare function cloneObject(target: any, persistOwnProps?: boolean): any;
 export declare function extendObject(target: any, src?: any, persistOwnProps?: boolean): any;
-export declare function isObject(obj: any): any;
+export declare function isObject(obj: any): boolean;

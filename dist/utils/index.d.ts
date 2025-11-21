@@ -34,6 +34,4 @@ export declare enum Framework {
 }
 export declare function isEditorModel(EditorModelClass: any): boolean;
 export declare function isString(str: any): boolean;
-export declare function isObject(obj: any): boolean;
 export declare function isProxy(obj: any): boolean;
-export declare function autoConvertVueComponent(component: any): any;

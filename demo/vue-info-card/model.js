@@ -15,7 +15,7 @@ export class InfoCardModel {
   description = '信息展示卡片';
 
   // 分类标签，用于设置在编辑器左侧组件面板哪个分类中展示（可设置多个分类标签）
-  tags = ['自定义组件'];
+  // tags = ['自定义组件'];
   
   // 组件图标，用于设置在编辑器左侧组件面板中展示的图标
   iconSrc = 'https://neo-widgets.bj.bcebos.com/custom-widget.svg';

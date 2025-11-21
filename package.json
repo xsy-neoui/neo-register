@@ -1,6 +1,6 @@
 {
   "name": "neo-register",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "neo自定义组件注册器（支持 react 和 vue2.0 技术栈），主要用于注册 neo 自定义组件、neo-editor 自定义组件模型。",
   "keywords": [
     "neo自定义组件注册器",
@@ -53,7 +53,7 @@
     "@types/react-dom": "^16.9.15",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.9",
-    "neo-cmp-cli": "^1.2.19",
+    "neo-cmp-cli": "^1.7.15",
     "prettier": "^2.0.5"
   },
   "engines": {

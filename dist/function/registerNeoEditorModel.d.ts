@@ -45,7 +45,24 @@ export interface PluginOption {
      */
     propsSchema?: boolean;
 }
+interface RegisterNeoEditorModelOptions {
+    targetPage?: string;
+    tags?: string[];
+    exposedToDesigner?: boolean;
+    namespace?: string;
+    enableDuplicate?: boolean;
+}
 /**
  * registerNeoEditorModel: 注册 neo-editor 自定义组件模型
+ *
+ * targetPage 取值说明
+ * all:	1	全页面
+ * indexPage:	2	首页
+ * entityListPage:	3	实体列表页
+ * entityFormPage:	4	实体表单页
+ * entityDetailPage:	5	实体详情页
+ * customPage:	6	自定义页面
+ * bizPage:	7	业务页面
  */
-export declare function registerNeoEditorModel(curEditorModel: any, cmpType?: string): void;
+export declare function registerNeoEditorModel(curEditorModel: any, cmpType?: string, options?: RegisterNeoEditorModelOptions): void;
+export {};

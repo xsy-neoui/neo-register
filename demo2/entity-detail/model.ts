@@ -18,7 +18,7 @@ export class EntityDetailModel {
   description: string = '展示实体数据详情信息，支持多列布局和字段类型识别';
 
   /** 分类标签，用于设置在编辑器左侧组件面板哪个分类中展示（可设置多个分类标签） */
-  tags: string[] = ['自定义组件'];
+  // tags: string[] = ['自定义组件'];
 
   /** 组件图标，用于设置在编辑器左侧组件面板中展示的图标 */
   iconSrc: string = 'https://custom-widgets.bj.bcebos.com/detail.svg';

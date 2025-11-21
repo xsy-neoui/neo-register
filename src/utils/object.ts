@@ -53,14 +53,6 @@ export function extendObject(
   return obj;
 }
 
-export function isObject(obj: any) {
-  const typename = typeof obj;
-  return (
-    obj &&
-    typename !== 'string' &&
-    typename !== 'number' &&
-    typename !== 'boolean' &&
-    typename !== 'function' &&
-    !Array.isArray(obj)
-  );
+export function isObject(obj: any): boolean {
+  return Object.prototype.toString.call(obj).slice(8, -1) === 'Object';
 }

@@ -60,10 +60,30 @@ declare const window: Window & {
   NEOEditorCustomModels: any;
 };
 
+interface RegisterNeoEditorModelOptions {
+  targetPage?: string;
+  tags?: string[];
+  exposedToDesigner?: boolean;
+  namespace?: string;
+  enableDuplicate?: boolean;
+}
 /**
  * registerNeoEditorModel: 注册 neo-editor 自定义组件模型
+ *
+ * targetPage 取值说明
+ * all:	1	全页面
+ * indexPage:	2	首页
+ * entityListPage:	3	实体列表页
+ * entityFormPage:	4	实体表单页
+ * entityDetailPage:	5	实体详情页
+ * customPage:	6	自定义页面
+ * bizPage:	7	业务页面
  */
-export function registerNeoEditorModel(curEditorModel: any, cmpType?: string) {
+export function registerNeoEditorModel(
+  curEditorModel: any,
+  cmpType?: string,
+  options?: RegisterNeoEditorModelOptions,
+) {
   if (curEditorModel && isEditorModel(curEditorModel)) {
     const curCmpType: any = cmpType || new curEditorModel().cmpType;
 
@@ -73,13 +93,24 @@ export function registerNeoEditorModel(curEditorModel: any, cmpType?: string) {
       );
     }
 
-    const curEditorModelObj = new curEditorModel();
+    const curOptions = options || {};
+
+    const curEditorModelObj = new curEditorModel(); // 注册前进行一次实例化
     Object.assign(curEditorModel.prototype, {
-      custom: true, // 自定义组件标识
-      exposedToDesigner: curEditorModelObj.exposedToDesigner ?? true, // 默认在设计器中显示
-      namespace: curEditorModelObj.namespace ?? 'neo-cmp-cli',
-      enableDuplicate: curEditorModelObj.enableDuplicate ?? true, // 默认在设计器中允许重复插入
+      ...curEditorModelObj, // 将实例化后的对象赋值给原型，以便在实例化时使用
       cmpType: curCmpType,
+      custom: true, // 自定义组件标识
+      tags: curEditorModelObj.tags ?? curOptions.tags ?? ['自定义组件'],
+      targetPage: curEditorModelObj.targetPage ??
+        curOptions.targetPage ?? ['customPage'],
+      exposedToDesigner:
+        curEditorModelObj.exposedToDesigner ??
+        curOptions.exposedToDesigner ??
+        true, // 默认在设计器中显示
+      namespace:
+        curEditorModelObj.namespace ?? curOptions.namespace ?? 'neo-cmp-cli',
+      enableDuplicate:
+        curEditorModelObj.enableDuplicate ?? curOptions.enableDuplicate ?? true, // 默认在设计器中允许重复插入
     });
 
     // registerEditorModel(curEditorModel); // 不直接注册为 neo-editor 插件

@@ -115,7 +115,7 @@ export function registerNeoCmp(
     } else {
       // 通过 postMessage 告知 neo 注册一个新的渲染器
       if (window && window.postMessage) {
-        const newComponentType = AddNeoCustomModel(curRendererOption.cmpType, {
+        const newComponentType = AddNeoCustomCmp(curRendererOption.cmpType, {
           cmpType: curRendererOption.cmpType,
           weight: curRendererOption.weight,
           usage: curRendererOption.usage,
@@ -146,7 +146,7 @@ export function registerNeoCmp(
   }
 }
 
-function AddNeoCustomModel(componentType: string, rendererData: any) {
+function AddNeoCustomCmp(componentType: string, rendererData: any) {
   if (window && !window.NeoCustomCmps) {
     window.NeoCustomCmps = {};
   }

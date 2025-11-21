@@ -1,123 +1,6 @@
 import React from 'react';
 import Vue from 'vue';
 
-/**
- * 将 vue2.0 自定义组件包裹成一个 react组件
- */
-function createVue2Component(vueObj) {
-    if (!vueObj || (typeof vueObj !== 'function' && typeof vueObj !== 'object')) {
-        return;
-    }
-    class VueFactory extends React.Component {
-        domRef;
-        vm;
-        isUnmount;
-        // 指定 contextType 读取当前的 scope context。
-        // React 会往上找到最近的 scope Provider，然后使用它的值。
-        // static contextType = ScopedContext; // 待支持
-        constructor(props, context) {
-            super(props);
-            this.domRef = React.createRef();
-            this.isUnmount = false;
-            /*
-            // 待支持（自定义组件支持事件动作）
-            const scoped = context;
-            scoped.registerComponent(this);
-            */
-            this.resolveNeoProps = this.resolveNeoProps.bind(this);
-        }
-        componentDidMount() {
-            const { neoData, neoMSTData, neoFunc } = this.resolveNeoProps();
-            const { data, ...rest } = (vueObj =
-                typeof vueObj === 'function' ? new vueObj() : vueObj);
-            const vueData = typeof data === 'function' ? data() : data;
-            const curVueData = extendObject(vueData, neoData);
-            // 传入的Vue属性
-            this.vm = new Vue({
-                ...rest,
-                data: () => curVueData,
-                props: extendObject(neoFunc, {
-                    ...(rest.props || {}),
-                    ...neoMSTData,
-                }),
-            });
-            Object.keys(neoFunc).forEach((key) => {
-                this.vm.$props[key] = neoFunc[key];
-            });
-            if (this.domRef.current) {
-                this.domRef.current.appendChild(this.vm.$mount().$el);
-            }
-        }
-        componentDidUpdate() {
-            if (!this.isUnmount) {
-                const { neoData } = this.resolveNeoProps();
-                if (this.vm) {
-                    Object.keys(neoData).forEach((key) => {
-                        this.vm[key] = neoData[key];
-                    });
-                    this.vm.$forceUpdate();
-                }
-            }
-        }
-        componentWillUnmount() {
-            this.isUnmount = true;
-            /*
-            // 待支持
-            const scoped = this.context;
-            scoped.unRegisterComponent(this);
-            */
-            if (this.vm) {
-                this.vm.$destroy();
-            }
-        }
-        resolveNeoProps() {
-            let neoFunc = {};
-            let neoData = {};
-            let neoMSTData = {};
-            Object.keys(this.props).forEach((key) => {
-                const value = this.props[key];
-                if (typeof value === 'function') {
-                    neoFunc[key] = value;
-                }
-                else if (isProxy(value)) {
-                    neoMSTData[key] = value;
-                }
-                else {
-                    neoData[key] = value;
-                }
-            });
-            return { neoData, neoMSTData, neoFunc };
-        }
-        /**
-         * reload动作处理
-         */
-        reload() {
-            if (this.vm && this.vm.reload) {
-                this.vm.reload();
-            }
-            else {
-                console.warn('自定义组件暂不支持reload动作。');
-            }
-        }
-        /**
-         * 事件动作处理:
-         * 在这里设置自定义组件对外暴露的动作，其他组件可以通过组件动作触发自定义组件的对应动作
-         */
-        doAction(action, args) {
-            if (this.vm && this.vm.doAction) {
-                this.vm.doAction(action, args);
-            }
-            else {
-                console.warn('自定义组件中不存在 doAction。');
-            }
-        }
-        render() {
-            return React.createElement("div", { ref: this.domRef });
-        }
-    }
-    return VueFactory;
-}
-
 // 方便取值的时候能够把上层的取到，但是获取的时候不会全部把所有的数据获取到。
 function cloneObject(target, persistOwnProps = true) {
     const obj = target && target.__super
@@ -242,17 +125,14 @@ function isEditorModel(EditorModelClass) {
     if (!_editorPluginObj.label) {
         console.error(`${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，名称（label）不能为空。`);
     }
-    else if (!_editorPluginObj.tags) {
-        console.error(`${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，组件分类（tags）不能为空。`);
-    }
-    else if (!Array.isArray(_editorPluginObj.tags)) {
+    else if (_editorPluginObj.tags && !Array.isArray(_editorPluginObj.tags)) {
         console.error(`${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，组件分类（tags）格式异常。`);
     }
     else {
         // 1.设置一个默认 icon
-        if (!_editorPluginObj.icon) {
+        if (!_editorPluginObj.iconSrc) {
             Object.assign(EditorModelClass.prototype, {
-                icon: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
+                iconSrc: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
             });
         }
         _isEditorModel = true;
@@ -273,30 +153,39 @@ function isProxy(obj) {
         obj.$modelId);
     return (hasMSTProperties || Object.prototype.toString.call(obj) === '[object Proxy]');
 }
-// 自动识别并转换 vue 组件
-function autoConvertVueComponent(component) {
-    if (isVueComponent(component)) {
-        return createVue2Component(component);
-    }
-    return component;
-}
 
 /**
  * registerNeoEditorModel: 注册 neo-editor 自定义组件模型
+ *
+ * targetPage 取值说明
+ * all:	1	全页面
+ * indexPage:	2	首页
+ * entityListPage:	3	实体列表页
+ * entityFormPage:	4	实体表单页
+ * entityDetailPage:	5	实体详情页
+ * customPage:	6	自定义页面
+ * bizPage:	7	业务页面
  */
-function registerNeoEditorModel(curEditorModel, cmpType) {
+function registerNeoEditorModel(curEditorModel, cmpType, options) {
     if (curEditorModel && isEditorModel(curEditorModel)) {
         const curCmpType = cmpType || new curEditorModel().cmpType;
         if (!curCmpType) {
             console.error(`${consoleTag} / registerNeoEditorModel: 自定义组件注册失败，cmpType 不能为空。`);
         }
-        const curEditorModelObj = new curEditorModel();
+        const curOptions = options || {};
+        const curEditorModelObj = new curEditorModel(); // 注册前进行一次实例化
         Object.assign(curEditorModel.prototype, {
-            custom: true,
-            exposedToDesigner: curEditorModelObj.exposedToDesigner ?? true,
-            namespace: curEditorModelObj.namespace ?? 'neo-cmp-cli',
-            enableDuplicate: curEditorModelObj.enableDuplicate ?? true,
+            ...curEditorModelObj,
             cmpType: curCmpType,
+            custom: true,
+            tags: curEditorModelObj.tags ?? curOptions.tags ?? ['自定义组件'],
+            targetPage: curEditorModelObj.targetPage ??
+                curOptions.targetPage ?? ['customPage'],
+            exposedToDesigner: curEditorModelObj.exposedToDesigner ??
+                curOptions.exposedToDesigner ??
+                true,
+            namespace: curEditorModelObj.namespace ?? curOptions.namespace ?? 'neo-cmp-cli',
+            enableDuplicate: curEditorModelObj.enableDuplicate ?? curOptions.enableDuplicate ?? true, // 默认在设计器中允许重复插入
         });
         // registerEditorModel(curEditorModel); // 不直接注册为 neo-editor 插件
         // 通过 postMessage 告知 neo-editor 注册一个新的插件
@@ -325,6 +214,130 @@ function AddCustomEditorModel(cmpType, model) {
         console.error(`${consoleTag}注册自定义组件模型失败，已存在重名插件(${cmpType})。`);
     }
     return null;
+}
+
+/**
+ * 将 vue2.0 自定义组件包裹成一个 react组件
+ */
+function createVue2Component(vueObj) {
+    if (!vueObj || (typeof vueObj !== 'function' && typeof vueObj !== 'object')) {
+        return;
+    }
+    class VueFactory extends React.Component {
+        domRef;
+        vm;
+        isUnmount;
+        // 指定 contextType 读取当前的 scope context。
+        // React 会往上找到最近的 scope Provider，然后使用它的值。
+        // static contextType = ScopedContext; // 待支持
+        constructor(props, context) {
+            super(props);
+            this.domRef = React.createRef();
+            this.isUnmount = false;
+            /*
+            // 待支持（自定义组件支持事件动作）
+            const scoped = context;
+            scoped.registerComponent(this);
+            */
+            this.resolveNeoProps = this.resolveNeoProps.bind(this);
+        }
+        componentDidMount() {
+            const { neoData, neoMSTData, neoFunc } = this.resolveNeoProps();
+            const { data, ...rest } = (vueObj =
+                typeof vueObj === 'function' ? new vueObj() : vueObj);
+            const vueData = typeof data === 'function' ? data() : data;
+            const curVueData = extendObject(vueData, neoData);
+            // 传入的Vue属性
+            this.vm = new Vue({
+                ...rest,
+                data: () => curVueData,
+                props: extendObject(neoFunc, {
+                    ...(rest.props || {}),
+                    ...neoMSTData,
+                }),
+            });
+            Object.keys(neoFunc).forEach((key) => {
+                this.vm.$props[key] = neoFunc[key];
+            });
+            if (this.domRef.current) {
+                this.domRef.current.appendChild(this.vm.$mount().$el);
+            }
+        }
+        componentDidUpdate() {
+            if (!this.isUnmount) {
+                const { neoData } = this.resolveNeoProps();
+                if (this.vm) {
+                    Object.keys(neoData).forEach((key) => {
+                        this.vm[key] = neoData[key];
+                    });
+                    this.vm.$forceUpdate();
+                }
+            }
+        }
+        componentWillUnmount() {
+            this.isUnmount = true;
+            /*
+            // 待支持
+            const scoped = this.context;
+            scoped.unRegisterComponent(this);
+            */
+            if (this.vm) {
+                this.vm.$destroy();
+            }
+        }
+        resolveNeoProps() {
+            let neoFunc = {};
+            let neoData = {};
+            let neoMSTData = {};
+            Object.keys(this.props).forEach((key) => {
+                const value = this.props[key];
+                if (typeof value === 'function') {
+                    neoFunc[key] = value;
+                }
+                else if (isProxy(value)) {
+                    neoMSTData[key] = value;
+                }
+                else {
+                    neoData[key] = value;
+                }
+            });
+            return { neoData, neoMSTData, neoFunc };
+        }
+        /**
+         * reload动作处理
+         */
+        reload() {
+            if (this.vm && this.vm.reload) {
+                this.vm.reload();
+            }
+            else {
+                console.warn('自定义组件暂不支持reload动作。');
+            }
+        }
+        /**
+         * 事件动作处理:
+         * 在这里设置自定义组件对外暴露的动作，其他组件可以通过组件动作触发自定义组件的对应动作
+         */
+        doAction(action, args) {
+            if (this.vm && this.vm.doAction) {
+                this.vm.doAction(action, args);
+            }
+            else {
+                console.warn('自定义组件中不存在 doAction。');
+            }
+        }
+        render() {
+            return React.createElement("div", { ref: this.domRef });
+        }
+    }
+    return VueFactory;
+}
+// 自动识别并转换 vue 组件
+function autoConvertVueComponent(component) {
+    if (isVueComponent(component)) {
+        return createVue2Component(component);
+    }
+    return component;
 }
 
 /**
@@ -390,7 +403,7 @@ function registerNeoCmp(newRenderer, rendererOption) {
         else {
             // 通过 postMessage 告知 neo 注册一个新的渲染器
             if (window && window.postMessage) {
-                const newComponentType = AddNeoCustomModel(curRendererOption.cmpType, {
+                const newComponentType = AddNeoCustomCmp(curRendererOption.cmpType, {
                     cmpType: curRendererOption.cmpType,
                     weight: curRendererOption.weight,
                     usage: curRendererOption.usage,
@@ -415,7 +428,7 @@ function registerNeoCmp(newRenderer, rendererOption) {
         }
     }
 }
-function AddNeoCustomModel(componentType, rendererData) {
+function AddNeoCustomCmp(componentType, rendererData) {
     if (window && !window.NeoCustomCmps) {
         window.NeoCustomCmps = {};
     }

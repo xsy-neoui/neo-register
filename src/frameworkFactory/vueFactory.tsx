@@ -5,7 +5,7 @@ import React from 'react';
 // import ReactDOM from 'react-dom';
 import Vue from 'vue';
 // import { ScopedContext, IScopedContext, RendererProps } from 'neo-core';
-import { extendObject, isProxy } from '../utils';
+import { extendObject, isProxy, isVueComponent } from '../utils';
 
 interface VueFactoryProps {
   [key: string]: any;
@@ -21,9 +21,9 @@ export function createVue2Component(vueObj: any) {
   }
 
   class VueFactory extends React.Component<VueFactoryProps, VueFactoryState> {
-    private domRef: React.RefObject<HTMLDivElement>;
-    private vm: any;
-    private isUnmount: boolean;
+    public domRef: React.RefObject<HTMLDivElement>;
+    public vm: any;
+    public isUnmount: boolean;
 
     // 指定 contextType 读取当前的 scope context。
     // React 会往上找到最近的 scope Provider，然后使用它的值。
@@ -139,4 +139,12 @@ export function createVue2Component(vueObj: any) {
   }
 
   return VueFactory;
+}
+
+// 自动识别并转换 vue 组件
+export function autoConvertVueComponent(component: any) {
+  if (isVueComponent(component)) {
+    return createVue2Component(component);
+  }
+  return component;
 }

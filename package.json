@@ -1,7 +1,7 @@
 {
   "name": "neo-register",
   "version": "1.0.8",
-  "description": "neo自定义组件注册器（支持 react 和 vue2.0 技术栈），主要用于注册 neo 自定义组件、neo-editor 自定义组件模型。",
+  "description": "Neo 自定义组件注册器（支持 react 和 vue2.0 技术栈），主要用于注册 Neo 自定义组件和自定义组件模型。",
   "keywords": [
     "neo自定义组件注册器",
     "neo自定义组件",
@@ -34,10 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git@github.com:wibetter/neo-register.git"
+    "url": "https://github.com/xsy-neoui/neo-register.git"
   },
   "bugs": {
-    "url": "https://github.com/wibetter/neo-register/issues"
+    "url": "https://github.com/xsy-neoui/neo-register/issues"
   },
   "dependencies": {
     "vue": "^2.6.14"

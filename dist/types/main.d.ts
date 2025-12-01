@@ -7,4 +7,4 @@
  */
 export { registerNeoEditorModel } from './function/registerNeoEditorModel';
 export { registerNeoCmp } from './function/registerNeoCmp';
-export { createVue2Component, autoConvertVueComponent } from './frameworkFactory/vueFactory';
+export { createVue2Component, autoConvertVueComponent, } from './frameworkFactory/vueFactory';

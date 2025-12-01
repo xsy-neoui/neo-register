@@ -87,23 +87,6 @@ class ReactSelectPlugin {
       }
     ]
   };
-  previewComProps = { // 设计器端预览时展示的默认数据
-    label: 'select 自定义组件',
-    options: [
-      {
-        label: 'A',
-        value: 'a'
-      },
-      {
-        label: 'B',
-        value: 'b'
-      },
-      {
-        label: 'C',
-        value: 'c'
-      }
-    ]
-  };
   propsSchema = [ // 组件面板配置，用于生成编辑器右侧属性配置面板内容
     {
       type: 'text',

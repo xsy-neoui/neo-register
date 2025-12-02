@@ -22,7 +22,7 @@ export class EntityDetailModel {
   // tags: string[] = ['自定义组件'];
 
   /** 组件图标，用于设置在编辑器左侧组件面板中展示的图标 */
-  iconSrc: string = 'https://custom-widgets.bj.bcebos.com/detail.svg';
+  iconUrl: string = 'https://custom-widgets.bj.bcebos.com/detail.svg';
 
   /** 初次插入页面的默认属性数据 */
   defaultComProps = {

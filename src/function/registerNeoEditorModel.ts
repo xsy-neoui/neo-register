@@ -30,7 +30,7 @@ export interface PluginOption {
   /**
    * 自定义组件icon
    */
-  iconSrc?: string;
+  iconUrl?: string;
 
   /**
    * 自定义组件排序
@@ -63,6 +63,7 @@ declare const window: Window & {
 interface RegisterNeoEditorModelOptions {
   targetPage?: string;
   tags?: string[];
+  iconUrl?: string;
   exposedToDesigner?: boolean;
   namespace?: string;
   enableDuplicate?: boolean;
@@ -101,6 +102,10 @@ export function registerNeoEditorModel(
       cmpType: curCmpType,
       custom: true, // 自定义组件标识
       tags: curEditorModelObj.tags ?? curOptions.tags ?? ['自定义组件'],
+      iconUrl:
+        curOptions.iconUrl ??
+        curEditorModelObj.iconSrc ??
+        'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
       targetPage: curEditorModelObj.targetPage ??
         curOptions.targetPage ?? ['customPage'],
       exposedToDesigner:

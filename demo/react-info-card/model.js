@@ -18,8 +18,8 @@ export class InfoCardModel {
   // tags = ['自定义组件'];
   
   // 组件图标，用于设置在编辑器左侧组件面板中展示的图标
-  iconSrc = 'https://neo-widgets.bj.bcebos.com/custom-widget.svg';
-  // iconSrc = 'https://neo-widgets.bj.bcebos.com/favicon.png';
+  iconUrl = 'https://neo-widgets.bj.bcebos.com/custom-widget.svg';
+  // iconUrl = 'https://neo-widgets.bj.bcebos.com/favicon.png';
 
   // 初次插入页面的默认属性数据
   defaultComProps = {

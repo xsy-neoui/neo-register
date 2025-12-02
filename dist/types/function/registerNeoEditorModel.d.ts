@@ -25,7 +25,7 @@ export interface PluginOption {
     /**
      * 自定义组件icon
      */
-    iconSrc?: string;
+    iconUrl?: string;
     /**
      * 自定义组件排序
      * 指定当前自定义组件模型在「页面设计器」自定义组件面板中的展示次序
@@ -48,6 +48,7 @@ export interface PluginOption {
 interface RegisterNeoEditorModelOptions {
     targetPage?: string;
     tags?: string[];
+    iconUrl?: string;
     exposedToDesigner?: boolean;
     namespace?: string;
     enableDuplicate?: boolean;

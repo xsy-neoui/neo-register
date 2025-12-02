@@ -68,7 +68,7 @@ class ReactSelectPlugin {
   label = 'select 自定义组件'; // 组件名称，用于设置在编辑器左侧组件面板中展示的名称
   description = 'react-select 自定义组件'; // 组件描述，用于设置在编辑器左侧组件面板中展示的描述
   tags = ['自定义组件']; // 自定义组件分类
-  iconSrc = 'https://neo-widgets.bj.bcebos.com/custom-widget.svg'; // 组件图标，用于设置在编辑器左侧组件面板中展示的图标
+  iconUrl = 'https://neo-widgets.bj.bcebos.com/custom-widget.svg'; // 组件图标，用于设置在编辑器左侧组件面板中展示的图标
   defaultComProps = { // 初次插入页面的默认属性数据
     label: 'select 自定义组件',
     name: 'customSelect',

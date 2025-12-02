@@ -118,9 +118,9 @@ export function isEditorModel(EditorModelClass: any) {
     );
   } else {
     // 1.设置一个默认 icon
-    if (!_editorPluginObj.iconSrc) {
+    if (!_editorPluginObj.iconUrl) {
       Object.assign(EditorModelClass.prototype, {
-        iconSrc: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
+        iconUrl: 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
       });
     }
     _isEditorModel = true;

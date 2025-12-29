@@ -107,7 +107,7 @@ export function registerNeoEditorModel(
         curEditorModelObj.iconSrc ??
         'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
       targetPage: curEditorModelObj.targetPage ??
-        curOptions.targetPage ?? ['customPage'],
+        curOptions.targetPage ?? ['all'],
       exposedToDesigner:
         curEditorModelObj.exposedToDesigner ??
         curOptions.exposedToDesigner ??

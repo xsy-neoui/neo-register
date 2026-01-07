@@ -175,7 +175,7 @@ function isProxy(obj) {
  */
 function registerNeoEditorModel(curEditorModel, cmpType, options) {
   if (curEditorModel && isEditorModel(curEditorModel)) {
-    var _ref, _curEditorModelObj$ta, _ref2, _curOptions$iconUrl, _ref3, _curEditorModelObj$ta2, _ref4, _curEditorModelObj$ex, _ref5, _curEditorModelObj$na, _ref6, _curEditorModelObj$en;
+    var _ref, _curOptions$tags, _ref2, _curOptions$iconUrl, _ref3, _curEditorModelObj$ta, _ref4, _curEditorModelObj$ex, _ref5, _curEditorModelObj$na, _ref6, _curEditorModelObj$en;
     var curCmpType = cmpType || new curEditorModel().cmpType;
     if (!curCmpType) {
       console.error(consoleTag + " / registerNeoEditorModel: \u81EA\u5B9A\u4E49\u7EC4\u4EF6\u6CE8\u518C\u5931\u8D25\uFF0CcmpType \u4E0D\u80FD\u4E3A\u7A7A\u3002");
@@ -185,9 +185,9 @@ function registerNeoEditorModel(curEditorModel, cmpType, options) {
     Object.assign(curEditorModel.prototype, _extends({}, curEditorModelObj, {
       cmpType: curCmpType,
       custom: true,
-      tags: (_ref = (_curEditorModelObj$ta = curEditorModelObj.tags) !== null && _curEditorModelObj$ta !== void 0 ? _curEditorModelObj$ta : curOptions.tags) !== null && _ref !== void 0 ? _ref : ['自定义组件'],
+      tags: (_ref = (_curOptions$tags = curOptions.tags) !== null && _curOptions$tags !== void 0 ? _curOptions$tags : curEditorModelObj.tags) !== null && _ref !== void 0 ? _ref : ['自定义组件'],
       iconUrl: (_ref2 = (_curOptions$iconUrl = curOptions.iconUrl) !== null && _curOptions$iconUrl !== void 0 ? _curOptions$iconUrl : curEditorModelObj.iconSrc) !== null && _ref2 !== void 0 ? _ref2 : 'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
-      targetPage: (_ref3 = (_curEditorModelObj$ta2 = curEditorModelObj.targetPage) !== null && _curEditorModelObj$ta2 !== void 0 ? _curEditorModelObj$ta2 : curOptions.targetPage) !== null && _ref3 !== void 0 ? _ref3 : ['all'],
+      targetPage: (_ref3 = (_curEditorModelObj$ta = curEditorModelObj.targetPage) !== null && _curEditorModelObj$ta !== void 0 ? _curEditorModelObj$ta : curOptions.targetPage) !== null && _ref3 !== void 0 ? _ref3 : ['all'],
       exposedToDesigner: (_ref4 = (_curEditorModelObj$ex = curEditorModelObj.exposedToDesigner) !== null && _curEditorModelObj$ex !== void 0 ? _curEditorModelObj$ex : curOptions.exposedToDesigner) !== null && _ref4 !== void 0 ? _ref4 : true,
       namespace: (_ref5 = (_curEditorModelObj$na = curEditorModelObj.namespace) !== null && _curEditorModelObj$na !== void 0 ? _curEditorModelObj$na : curOptions.namespace) !== null && _ref5 !== void 0 ? _ref5 : 'neo-cmp-cli',
       enableDuplicate: (_ref6 = (_curEditorModelObj$en = curEditorModelObj.enableDuplicate) !== null && _curEditorModelObj$en !== void 0 ? _curEditorModelObj$en : curOptions.enableDuplicate) !== null && _ref6 !== void 0 ? _ref6 : true // 默认在设计器中允许重复插入

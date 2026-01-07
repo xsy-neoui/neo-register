@@ -101,7 +101,7 @@ export function registerNeoEditorModel(
       ...curEditorModelObj, // 将实例化后的对象赋值给原型，以便在实例化时使用
       cmpType: curCmpType,
       custom: true, // 自定义组件标识
-      tags: curEditorModelObj.tags ?? curOptions.tags ?? ['自定义组件'],
+      tags: curOptions.tags ?? curEditorModelObj.tags ?? ['自定义组件'], // 优先使用传入的 tags，否则使用实例化后的对象的 tags，最后使用默认值
       iconUrl:
         curOptions.iconUrl ??
         curEditorModelObj.iconSrc ??

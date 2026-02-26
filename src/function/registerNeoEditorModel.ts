@@ -61,7 +61,8 @@ declare const window: Window & {
 };
 
 interface RegisterNeoEditorModelOptions {
-  targetPage?: string;
+  targetPage?: string[];
+  targetDevice?: string;
   tags?: string[];
   iconUrl?: string;
   exposedToDesigner?: boolean;
@@ -108,6 +109,8 @@ export function registerNeoEditorModel(
         'https://neo-widgets.bj.bcebos.com/custom-widget.svg',
       targetPage: curEditorModelObj.targetPage ??
         curOptions.targetPage ?? ['all'],
+      targetDevice:
+        curEditorModelObj.targetDevice ?? curOptions.targetDevice ?? 'all',
       exposedToDesigner:
         curEditorModelObj.exposedToDesigner ??
         curOptions.exposedToDesigner ??

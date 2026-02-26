@@ -46,7 +46,8 @@ export interface PluginOption {
     propsSchema?: boolean;
 }
 interface RegisterNeoEditorModelOptions {
-    targetPage?: string;
+    targetPage?: string[];
+    targetDevice?: string;
     tags?: string[];
     iconUrl?: string;
     exposedToDesigner?: boolean;
